@@ -39,7 +39,7 @@ def test_cycle_many_elements():
 
 def test_cycle_empty_arbitrary_iterator():
     """Test how cycle behaves with a more general empty iterator."""
-    VALUES = (value for value in range(0, -5))
+    VALUES = (value for value in [])
     with pytest.raises(StopIteration):
         next(cycle(VALUES))
 
