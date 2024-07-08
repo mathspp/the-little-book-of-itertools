@@ -54,5 +54,7 @@ def test_cycle_arbitrary_iterator():
 
 def test_cycle_works_with_infinite_iterator():
     """Test that cycle still works when fed an infinite iterator."""
-    for idx, value in enumerate(islice(cycle(count()), 1000)):
+    pairs = list(enumerate(islice(cycle(count()), 1000)))
+    assert len(pairs) == 1000
+    for idx, value in pairs:
         assert value == idx
