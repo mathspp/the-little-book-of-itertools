@@ -17,7 +17,9 @@ def test_count_is_not_iterator():
 
 def test_count_no_args():
     """Test `count` with no arguments specified (using the defaults)."""
-    for value, real in islice(zip(count(), _count()), 1000):
+    pairs = list(islice(zip(count(), _count()), 1000))
+    assert len(pairs) == 1000
+    for value, real in pairs:
         assert value == real
 
 
@@ -32,13 +34,17 @@ def test_count_no_args():
 )
 def test_count_start(start):
     """Test `count` when only the first argument is specified."""
-    for value, real in islice(zip(count(start), _count(start)), 1000):
+    pairs = list(islice(zip(count(start), _count(start)), 1000))
+    assert len(pairs) == 1000
+    for value, real in pairs:
         assert value == real
 
 
 def test_count_non_integer_start():
     """Test `count` when the start is not an integer."""
-    for value, real in islice(zip(count(0.5), _count(0.5)), 10):
+    pairs = list(islice(zip(count(0.5), _count(0.5)), 10))
+    assert len(pairs) == 10
+    for value, real in pairs:
         assert value == real
 
 
@@ -58,17 +64,23 @@ def test_count_non_integer_start():
 )
 def test_count_start_and_step(start, step):
     """Test `count` when both arguments are specified."""
-    for value, real in islice(zip(count(start, step), _count(start, step)), 1000):
+    pairs = list(islice(zip(count(start, step), _count(start, step)), 1000))
+    assert len(pairs) == 1000
+    for value, real in pairs:
         assert value == real
 
 
 def test_count_non_integer_step():
     """Test `count` when the step is not an integer."""
-    for value, real in islice(zip(count(0, 0.5), _count(0, 0.5)), 10):
+    pairs = list(islice(zip(count(0, 0.5), _count(0, 0.5)), 10))
+    assert len(pairs) == 10
+    for value, real in pairs:
         assert value == real
 
 
 def test_count_both_args_non_integers():
     """Test `count` when both arguments are not integers."""
-    for value, real in islice(zip(count(0.5, 0.25), _count(0.5, 0.25)), 10):
+    pairs = list(islice(zip(count(0.5, 0.25), _count(0.5, 0.25)), 10))
+    assert len(pairs) == 10
+    for value, real in pairs:
         assert value == real

@@ -80,5 +80,7 @@ def test_n_wise():
 def test_n_wise_infinite_iterable():
     """Test `n_wise` with an infinite iterable."""
     nw = n_wise(count(), 4)
-    for lower, value in zip(range(150), nw):
+    pairs = list(zip(range(150), nw))
+    assert len(pairs) == 150
+    for lower, value in pairs:
         assert (lower, lower + 1, lower + 2, lower + 3) == value

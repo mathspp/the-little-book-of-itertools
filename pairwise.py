@@ -49,5 +49,7 @@ def test_pairwise():
 def test_pairwise_infinite_iterable():
     """Test `pairwise` with an infinite iterable."""
     pw = pairwise(count())
-    for lower, value in zip(range(150), pw):
+    pairs = list(zip(range(150), pw))
+    assert len(pairs) == 150
+    for lower, value in pairs:
         assert (lower, lower + 1) == value

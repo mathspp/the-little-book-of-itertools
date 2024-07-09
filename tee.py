@@ -1,4 +1,4 @@
-from itertools import count
+from itertools import count, islice
 
 
 def tee(iterable, n=2):
@@ -6,7 +6,7 @@ def tee(iterable, n=2):
 
 
 def test_tee_zero_iterators():
-    """Test that `tee` works with `n=2`."""
+    """Test that `tee` works with `n=0`."""
     assert tuple() == tee([], 0)
 
 
@@ -63,6 +63,7 @@ def test_tee_basic_interweaved():
 def test_tee_many_iterators():
     """Test `tee` with `n` set to a “large” value."""
     iterators = tee(range(10), 100)
+    assert len(iterators) == 100
     for value in range(10):
         for iterator in iterators:
             assert next(iterator) == value
@@ -71,7 +72,12 @@ def test_tee_many_iterators():
 def test_tee_infinite_iterator():
     """Test `tee` with an infinite iterator."""
     it1, it2 = tee(count(), 2)
-    for expected, value in zip(range(100), it1):
+    first100 = list(islice(it1, 100))
+    assert len(first100) == 100
+    for expected, value in zip(range(100), first100):
         assert expected == value
-    for expected, value in zip(range(150), it2):
+
+    first150 = list(islice(it2, 150))
+    assert len(first150) == 150
+    for expected, value in zip(range(150), first150):
         assert expected == value

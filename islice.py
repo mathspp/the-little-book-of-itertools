@@ -5,26 +5,7 @@ import pytest
 
 class islice:
     def __init__(self, iterable, *args):
-        parsed_args = slice(*args)
-        self.step = parsed_args.step or 1
-        self.at = -1
-        self.next_id = parsed_args.start or 0
-        indices = (
-            count()
-            if parsed_args.stop is None
-            else range(max(parsed_args.stop, parsed_args.start or 0))
-        )
-        self.iterator = zip(indices, iterable)
-
-    def __iter__(self):
-        return self
-
-    def __next__(self):
-        while self.at < self.next_id:
-            self.at, value = next(self.iterator)
-
-        self.next_id += self.step
-        return value
+        raise NotImplementedError()
 
 
 def test_islice_is_iterator():
@@ -79,7 +60,9 @@ def test_islice_only_stop_none():
 def test_islice_only_stop_none_infinite_iterable():
     """Test `islice` with a single argument `None` and an infinite iterable."""
     iterable = count()
-    for expected, value in zip(range(150), islice(iterable, None)):
+    pairs = list(zip(range(150), islice(iterable, None)))
+    assert len(pairs) == 150
+    for expected, value in pairs:
         assert expected == value
 
 

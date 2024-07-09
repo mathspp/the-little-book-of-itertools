@@ -30,5 +30,6 @@ def test_repeat_infinite():
     approximation.
     """
     repeated = repeat(15)
-    for _, value in zip(range(999_999), repeated):
-        assert value == 15
+    pairs = list(zip(range(999), repeated))
+    assert len(pairs) == 999
+    assert all(value == 15 for _, value in pairs)
