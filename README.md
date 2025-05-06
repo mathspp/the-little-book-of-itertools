@@ -15,3 +15,14 @@ Follow these instructions if you're attending the PyCon US tutorial “Reimpleme
  5. check everything is right by running `pytest count.py`, which should run `pytest` on the file `count.py`; this should show ~20 failing tests.
 
 Make sure you do this _before_ the tutorial, since Wi-Fi at the venue is supposedly subpar.
+
+
+## How to check if an exercise is correct
+
+Each file contains the signature for an `itertools` object at the top of the file.
+(The signature in the `.py` file might not match the full signature of the tool from `itertools`. This is on purpose.)
+
+Each file also contains a number of automated tests to check your work.
+Once you fill in the signature with your implementation of the tool, you will want to run the automated tests with pytest.
+Make sure pytest is installed and then run `pytest file_to_test.py`.
+For example, once you complete `count.py`, you'll run `pytest count.py`.
