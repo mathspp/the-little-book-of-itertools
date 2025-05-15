@@ -52,7 +52,7 @@ def test_dropwhile():
     def is_even(number):
         return number % 2 == 0
 
-    # We won't reach the evens after the 5   X  v  v  vv
+    # We won't see the evens before the 5.
     assert list(dropwhile(is_even, [0, 2, 4, 5, 6, 8, 10])) == [5, 6, 8, 10]
 
 
